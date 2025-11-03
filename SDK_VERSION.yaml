@@ -65,7 +65,7 @@ api_signatures:
 
 # Files that contain API references (must be updated when SDK changes)
 agent_files:
-  - path: ".claude/agents/cloudx-integrator.md"
+  - path: ".claude/agents/cloudx-android-integrator.md"
     api_references:
       - "CloudXInitializationParams"
       - "CloudXInitializationListener"
@@ -79,30 +79,30 @@ agent_files:
       - "show()"
       - "load()"
 
-  - path: ".claude/agents/cloudx-auditor.md"
+  - path: ".claude/agents/cloudx-android-auditor.md"
     api_references:
       - "onAdLoadFailed"
       - "CloudXError"
       - "isAdReady"
 
-  - path: ".claude/agents/cloudx-privacy-checker.md"
+  - path: ".claude/agents/cloudx-android-build-verifier.md"
+    api_references:
+      - "Gradle build validation"  # Validates SDK integration
+
+  - path: ".claude/agents/cloudx-android-privacy-checker.md"
     api_references:
       - "CloudXPrivacy"
       - "isUserConsent"
       - "isAgeRestrictedUser"
       - "CloudX.setPrivacy"
 
-  - path: "integration_agent_claude.md"
+  - path: "docs/INTEGRATION_GUIDE.md"
     api_references:
       - "ALL"  # Comprehensive guide, references all APIs
 
-  - path: "CLOUDX_SUBAGENTS.md"
+  - path: "docs/ORCHESTRATION.md"
     api_references:
-      - "ALL"  # Orchestration guide
-
-  - path: ".claude/agents/cloudx-android-agent-maintainer.md"
-    api_references:
-      - "ALL"  # Agent maintainer references all APIs for validation/sync
+      - "ALL"  # Multi-agent orchestration guide
 
 # Update checklist (what to do when SDK version changes)
 update_checklist:

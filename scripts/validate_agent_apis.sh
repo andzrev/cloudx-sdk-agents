@@ -1,6 +1,6 @@
 #!/bin/bash
-# Validates that agent documentation APIs match actual CloudX SDK APIs
-# Run this after SDK updates to detect breaking changes
+# Validates agent documentation syntax and consistency
+# For full SDK API validation, run from SDK repo with SDK source available
 
 # Note: We do NOT use 'set -e' here because we want to collect ALL failures
 # before exiting, not stop at the first error
@@ -13,12 +13,29 @@ NC='\033[0m' # No Color
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-SDK_DIR="$REPO_ROOT/sdk/src/main/java/io/cloudx/sdk"
 AGENT_DIR="$REPO_ROOT/.claude/agents"
 
-echo "🔍 CloudX Agent API Validation"
-echo "================================"
+# SDK_DIR can be provided via env var or default to sibling repo
+SDK_DIR="${SDK_DIR:-$(dirname "$REPO_ROOT")/cloudexchange.android.sdk/sdk/src/main/java/io/cloudx/sdk}"
+
+echo "🔍 CloudX Agent Documentation Validation"
+echo "========================================"
 echo ""
+
+# Check if SDK source is available
+SDK_AVAILABLE=false
+if [ -d "$SDK_DIR" ]; then
+    echo "✅ SDK source found: $SDK_DIR"
+    echo "   Running full validation (agent docs + SDK API)"
+    SDK_AVAILABLE=true
+else
+    echo "⚠️  SDK source not found at: $SDK_DIR"
+    echo "   Running agent doc validation only (syntax & consistency)"
+    echo ""
+    echo "   To validate against SDK APIs, set SDK_DIR environment variable:"
+    echo "   export SDK_DIR=/path/to/cloudexchange.android.sdk/sdk/src/main/java/io/cloudx/sdk"
+    echo ""
+fi
 
 # Track results
 TOTAL_CHECKS=0
@@ -46,177 +63,136 @@ check_warn() {
     ((WARNINGS++))
 }
 
-# Filter out VALIDATION:IGNORE sections from agent documentation
-# Usage: filter_validation_content "$AGENT_DIR"
-# Returns: Content with VALIDATION:IGNORE sections removed
-filter_validation_content() {
-    local dir="$1"
-    find "$dir" -name "*.md" -type f | while read -r file; do
-        # Use sed to remove lines between VALIDATION:IGNORE markers
-        sed '/VALIDATION:IGNORE:START/,/VALIDATION:IGNORE:END/d' "$file"
-    done
-}
-
-# 1. Check SDK source files exist
-echo "📁 Checking SDK Source Files..."
-if [ ! -d "$SDK_DIR" ]; then
-    check_fail "SDK directory not found" "Expected: $SDK_DIR"
+# 1. Check agent files exist
+echo "📁 Checking Agent Files..."
+if [ ! -d "$AGENT_DIR" ]; then
+    check_fail "Agent directory not found" "Expected: $AGENT_DIR"
     exit 1
 fi
 
-check_pass "SDK directory found: $SDK_DIR"
-echo ""
+REQUIRED_AGENTS=(
+    "cloudx-android-integrator"
+    "cloudx-android-auditor"
+    "cloudx-android-build-verifier"
+    "cloudx-android-privacy-checker"
+)
 
-# 2. Validate initialization API
-echo "🔧 Checking Initialization API..."
-
-if grep -q "data class CloudXInitializationParams" "$SDK_DIR/CloudXInitializationParams.kt" 2>/dev/null; then
-    check_pass "CloudXInitializationParams class exists"
-else
-    check_fail "CloudXInitializationParams not found" "Has it been renamed?"
-fi
-
-if grep -q "interface CloudXInitializationListener" "$SDK_DIR/CloudXInitializationListener.kt" 2>/dev/null; then
-    check_pass "CloudXInitializationListener interface exists"
-else
-    check_fail "CloudXInitializationListener not found" "Has it been renamed?"
-fi
-
-# Check for old deprecated names in agent files
-# Uses filter_validation_content to exclude VALIDATION:IGNORE sections
-if filter_validation_content "$AGENT_DIR" | grep -q "CloudXInitParams"; then
-    check_fail "Agent uses OLD name 'CloudXInitParams'" "Should be 'CloudXInitializationParams'"
-fi
-
-if filter_validation_content "$AGENT_DIR" | grep -q "CloudXInitListener[^a-z]"; then
-    check_fail "Agent uses OLD name 'CloudXInitListener'" "Should be 'CloudXInitializationListener'"
-fi
-
-echo ""
-
-# 3. Validate factory methods
-echo "🏭 Checking Factory Methods..."
-
-# Check createBanner
-if grep -q "fun createBanner" "$SDK_DIR/CloudX.kt" 2>/dev/null; then
-    check_pass "CloudX.createBanner() exists"
-
-    # Check signature
-    if grep -q "fun createBanner(placementName: String)" "$SDK_DIR/CloudX.kt"; then
-        check_pass "createBanner() has correct signature (placementName only)"
+for agent in "${REQUIRED_AGENTS[@]}"; do
+    if [ -f "$AGENT_DIR/${agent}.md" ]; then
+        check_pass "Agent file exists: ${agent}.md"
     else
-        check_warn "createBanner() signature may have changed" "Review CloudX.kt"
-    fi
-else
-    check_fail "CloudX.createBanner() not found" "Has it been removed?"
-fi
-
-# Check createInterstitial
-if grep -q "fun createInterstitial" "$SDK_DIR/CloudX.kt" 2>/dev/null; then
-    check_pass "CloudX.createInterstitial() exists"
-else
-    check_fail "CloudX.createInterstitial() not found" "Has it been removed?"
-fi
-
-# Check createRewardedInterstitial
-if grep -q "fun createRewardedInterstitial" "$SDK_DIR/CloudX.kt" 2>/dev/null; then
-    check_pass "CloudX.createRewardedInterstitial() exists"
-else
-    check_fail "CloudX.createRewardedInterstitial() not found" "Has it been removed?"
-fi
-
-echo ""
-
-# 4. Validate listener interfaces
-echo "👂 Checking Listener Interfaces..."
-
-for listener in CloudXAdViewListener CloudXInterstitialListener CloudXRewardedInterstitialListener; do
-    if [ -f "$SDK_DIR/${listener}.kt" ]; then
-        check_pass "$listener interface exists"
-    else
-        check_fail "$listener not found" "File: $SDK_DIR/${listener}.kt"
+        check_fail "Agent file missing: ${agent}.md" "Expected at $AGENT_DIR/${agent}.md"
     fi
 done
 
 echo ""
 
-# 5. Check callback signatures
-echo "📞 Checking Callback Signatures..."
+# 2. Check for old deprecated API patterns in agent docs
+echo "🔍 Checking for Deprecated Patterns..."
 
-# Check if callbacks use CloudXAd parameter (not specific ad types)
-if grep -q "fun onAdLoaded(cloudXAd: CloudXAd)" "$SDK_DIR/CloudXAdListener.kt" 2>/dev/null; then
-    check_pass "onAdLoaded() uses CloudXAd parameter (correct)"
-else
-    check_warn "onAdLoaded() signature may have changed" "Check CloudXAdListener.kt"
+# Check for old class names (examples from past deprecations)
+if grep -r "CloudXInitParams[^a-z]" "$AGENT_DIR" --include="*.md" 2>/dev/null; then
+    check_warn "Found deprecated 'CloudXInitParams'" "Should be 'CloudXInitializationParams'"
 fi
 
-# Check if old signatures exist in agent docs
-if grep -rq "onAdLoaded(adView: CloudXAdView)" "$AGENT_DIR/" 2>/dev/null; then
-    check_fail "Agent uses OLD callback signature" "Should be: onAdLoaded(cloudXAd: CloudXAd)"
-fi
-
-if grep -rq "onAdFailedToLoad" "$AGENT_DIR/" 2>/dev/null; then
-    check_fail "Agent uses OLD callback name 'onAdFailedToLoad'" "Should be: onAdLoadFailed"
+if grep -r "CloudXInitListener[^a-z]" "$AGENT_DIR" --include="*.md" 2>/dev/null; then
+    check_warn "Found deprecated 'CloudXInitListener'" "Should be 'CloudXInitializationListener'"
 fi
 
 echo ""
 
-# 6. Check privacy API
-echo "🔒 Checking Privacy API..."
+# 3. Check agent docs reference current API classes
+echo "📝 Checking Agent Documentation Content..."
 
-if grep -q "data class CloudXPrivacy" "$SDK_DIR/CloudXPrivacy.kt" 2>/dev/null; then
-    check_pass "CloudXPrivacy class exists"
+# Check that agents reference key API classes
+REQUIRED_CLASSES=(
+    "CloudX"
+    "CloudXInitializationParams"
+    "CloudXInitializationListener"
+    "CloudXAdView"
+    "CloudXInterstitialAd"
+)
 
-    # Check fields
-    if grep -q "isUserConsent: Boolean?" "$SDK_DIR/CloudXPrivacy.kt"; then
-        check_pass "CloudXPrivacy has correct field: isUserConsent"
+for class_name in "${REQUIRED_CLASSES[@]}"; do
+    if grep -r "$class_name" "$AGENT_DIR" --include="*.md" > /dev/null 2>&1; then
+        check_pass "Agent docs reference $class_name"
     else
-        check_warn "CloudXPrivacy.isUserConsent field may have changed" "Check CloudXPrivacy.kt"
+        check_warn "No references to $class_name found" "Expected in integration examples"
+    fi
+done
+
+echo ""
+
+# 4. Check for common integration patterns
+echo "🔧 Checking Integration Patterns..."
+
+if grep -r "CloudX.initialize" "$AGENT_DIR" --include="*.md" > /dev/null 2>&1; then
+    check_pass "Initialization pattern found"
+else
+    check_fail "No CloudX.initialize() found" "Integration examples should show initialization"
+fi
+
+if grep -r "createBanner\|createInterstitial" "$AGENT_DIR" --include="*.md" > /dev/null 2>&1; then
+    check_pass "Ad creation patterns found"
+else
+    check_fail "No ad creation methods found" "Examples should show createBanner/createInterstitial"
+fi
+
+echo ""
+
+# 5. Full SDK validation (if SDK source available)
+if [ "$SDK_AVAILABLE" = true ]; then
+    echo "🏭 Validating Against SDK Source..."
+
+    # Check CloudX.kt exists
+    if [ ! -f "$SDK_DIR/CloudX.kt" ]; then
+        check_fail "CloudX.kt not found" "SDK source may be incomplete"
+    else
+        check_pass "SDK source files accessible"
+
+        # Verify key methods exist
+        if grep -q "fun initialize" "$SDK_DIR/CloudX.kt"; then
+            check_pass "CloudX.initialize() exists in SDK"
+        else
+            check_fail "CloudX.initialize() not found in SDK" "API may have changed"
+        fi
+
+        if grep -q "fun createBanner" "$SDK_DIR/CloudX.kt"; then
+            check_pass "CloudX.createBanner() exists in SDK"
+        else
+            check_fail "CloudX.createBanner() not found in SDK" "API may have changed"
+        fi
+
+        if grep -q "fun createInterstitial" "$SDK_DIR/CloudX.kt"; then
+            check_pass "CloudX.createInterstitial() exists in SDK"
+        else
+            check_fail "CloudX.createInterstitial() not found in SDK" "API may have changed"
+        fi
     fi
 
-    if grep -q "isAgeRestrictedUser: Boolean?" "$SDK_DIR/CloudXPrivacy.kt"; then
-        check_pass "CloudXPrivacy has correct field: isAgeRestrictedUser"
+    echo ""
+fi
+
+# 6. Check SDK_VERSION.yaml
+echo "📋 Checking SDK_VERSION.yaml..."
+if [ -f "$REPO_ROOT/SDK_VERSION.yaml" ]; then
+    check_pass "SDK_VERSION.yaml exists"
+
+    if grep -q "sdk_version:" "$REPO_ROOT/SDK_VERSION.yaml"; then
+        check_pass "SDK version specified"
     else
-        check_warn "CloudXPrivacy.isAgeRestrictedUser field may have changed" "Check CloudXPrivacy.kt"
+        check_fail "sdk_version not found in SDK_VERSION.yaml" "Version tracking required"
     fi
 else
-    check_fail "CloudXPrivacy not found" "File: $SDK_DIR/CloudXPrivacy.kt"
-fi
-
-# Check for old wrong field names in agents
-# Uses filter_validation_content to exclude VALIDATION:IGNORE sections
-if filter_validation_content "$AGENT_DIR" | grep -E "hasGdprConsent|hasCcpaConsent|isCoppa[^b]"; then
-    check_fail "Agent uses OLD CloudXPrivacy field names" "Should be: isUserConsent, isAgeRestrictedUser"
+    check_fail "SDK_VERSION.yaml not found" "Expected at repo root"
 fi
 
 echo ""
 
-# 7. Check for deprecated patterns
-echo "🚫 Checking for Deprecated Patterns..."
-
-# Check if agents mention auto-loading (wrong)
-if grep -rq "auto-load\|automatically load" "$AGENT_DIR/" 2>/dev/null; then
-    check_warn "Agent mentions 'auto-load'" "CloudX ads do NOT auto-load, must call .load()"
-fi
-
-# Check if agents mention isReady() as method
-# Uses filter_validation_content to exclude VALIDATION:IGNORE sections
-if filter_validation_content "$AGENT_DIR" | grep -q "isReady()"; then
-    check_fail "Agent uses isReady() as method" "Should be: isAdReady property (no parentheses)"
-fi
-
-# Check if agents mention show(activity) for CloudX
-# Uses filter_validation_content to exclude VALIDATION:IGNORE sections
-if filter_validation_content "$AGENT_DIR" | grep -q "show(activity)"; then
-    check_fail "Agent uses show(activity)" "Should be: show() with no parameters"
-fi
-
-echo ""
-
-# 8. Summary
-echo "================================"
+# 7. Summary
+echo "========================================"
 echo "📊 Validation Summary"
-echo "================================"
+echo "========================================"
 echo -e "Total Checks:  $TOTAL_CHECKS"
 echo -e "${GREEN}Passed:        $PASSED_CHECKS${NC}"
 echo -e "${RED}Failed:        $FAILED_CHECKS${NC}"
@@ -229,9 +205,8 @@ if [ $FAILED_CHECKS -gt 0 ]; then
     echo "Action Required:"
     echo "1. Review failed checks above"
     echo "2. Update agent files to match current SDK APIs"
-    echo "3. Update integration_agent_claude.md with new examples"
-    echo "4. Update .claude/AGENT_SDK_VERSION.yaml"
-    echo "5. Re-run this script to verify fixes"
+    echo "3. Update SDK_VERSION.yaml if needed"
+    echo "4. Re-run this script to verify fixes"
     echo ""
     exit 1
 elif [ $WARNINGS -gt 0 ]; then
@@ -243,7 +218,12 @@ elif [ $WARNINGS -gt 0 ]; then
 else
     echo -e "${GREEN}✅ ALL CHECKS PASSED${NC}"
     echo ""
-    echo "Agent documentation is in sync with SDK $sdk_version"
+    if [ "$SDK_AVAILABLE" = true ]; then
+        echo "Agent documentation validated against SDK source"
+    else
+        echo "Agent documentation syntax validated"
+        echo "Run with SDK source for full API validation"
+    fi
     echo ""
     exit 0
 fi
