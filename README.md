@@ -34,31 +34,31 @@ bash scripts/install.sh --platform=flutter
 ```bash
 cd your-android-project
 claude
-"Use cloudx-android-integrator to integrate CloudX SDK with app key: YOUR_KEY"
+"Use @agent-cloudx-android-integrator to integrate CloudX SDK with app key: YOUR_KEY"
 ```
 
 **Flutter:**
 ```bash
 cd your-flutter-project
 claude
-"Use cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_KEY"
+"Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_KEY"
 ```
 
 ## Agents by Platform
 
 ### Android Agents
-- **cloudx-android-integrator** - Implements CloudX with AdMob/AppLovin fallback
-- **cloudx-android-auditor** - Validates fallback paths remain intact
-- **cloudx-android-build-verifier** - Runs Gradle builds and catches errors
-- **cloudx-android-privacy-checker** - Validates GDPR/CCPA/COPPA compliance
+- **@agent-cloudx-android-integrator** - Implements CloudX with AdMob/AppLovin fallback
+- **@agent-cloudx-android-auditor** - Validates fallback paths remain intact
+- **@agent-cloudx-android-build-verifier** - Runs Gradle builds and catches errors
+- **@agent-cloudx-android-privacy-checker** - Validates GDPR/CCPA/COPPA compliance
 
 [📖 Android Documentation](./docs/android/)
 
 ### Flutter Agents
-- **cloudx-flutter-integrator** - Implements CloudX with AdMob/AppLovin fallback
-- **cloudx-flutter-auditor** - Validates fallback paths remain intact
-- **cloudx-flutter-build-verifier** - Runs Flutter builds and catches errors
-- **cloudx-flutter-privacy-checker** - Validates GDPR/CCPA/COPPA compliance
+- **@agent-cloudx-flutter-integrator** - Implements CloudX with AdMob/AppLovin fallback
+- **@agent-cloudx-flutter-auditor** - Validates fallback paths remain intact
+- **@agent-cloudx-flutter-build-verifier** - Runs Flutter builds and catches errors
+- **@agent-cloudx-flutter-privacy-checker** - Validates GDPR/CCPA/COPPA compliance
 
 [📖 Flutter Documentation](./docs/flutter/)
 

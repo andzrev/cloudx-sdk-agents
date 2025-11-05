@@ -26,7 +26,7 @@ This comprehensive guide provides detailed code examples for integrating CloudX 
 
 ### What the Agents Do
 
-The `cloudx-flutter-integrator` agent automatically:
+The `@agent-cloudx-flutter-integrator` agent automatically:
 1. Detects existing ad SDKs (AdMob, AppLovin)
 2. Chooses integration mode (CloudX-only or first-look with fallback)
 3. Adds CloudX dependency

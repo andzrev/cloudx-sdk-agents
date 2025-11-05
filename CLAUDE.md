@@ -20,20 +20,20 @@ The repository implements a specialized multi-agent architecture where each agen
 User/Main Agent (Coordinator)
     │
     ├──► Android Agents
-    │    ├── cloudx-android-integrator     (Implementation)
-    │    ├── cloudx-android-auditor        (Validation)
-    │    ├── cloudx-android-build-verifier (Testing)
-    │    └── cloudx-android-privacy-checker (Compliance)
+    │    ├── @agent-cloudx-android-integrator     (Implementation)
+    │    ├── @agent-cloudx-android-auditor        (Validation)
+    │    ├── @agent-cloudx-android-build-verifier (Testing)
+    │    └── @agent-cloudx-android-privacy-checker (Compliance)
     │
     └──► Flutter Agents
-         ├── cloudx-flutter-integrator     (Implementation)
-         ├── cloudx-flutter-auditor        (Validation)
-         ├── cloudx-flutter-build-verifier (Testing)
-         └── cloudx-flutter-privacy-checker (Compliance)
+         ├── @agent-cloudx-flutter-integrator     (Implementation)
+         ├── @agent-cloudx-flutter-auditor        (Validation)
+         ├── @agent-cloudx-flutter-build-verifier (Testing)
+         └── @agent-cloudx-flutter-privacy-checker (Compliance)
 ```
 
 **Agent Definitions**: All agents are defined as markdown files in `.claude/agents/<platform>/` with frontmatter specifying:
-- `name`: Agent identifier (e.g., `cloudx-flutter-integrator`)
+- `name`: Agent identifier (e.g., `cloudx-flutter-integrator`) that maps to Claude invocation `@agent-cloudx-flutter-integrator`
 - `description`: When to invoke the agent (critical for auto-routing)
 - `tools`: Available tools (Read, Write, Edit, Grep, Glob, Bash)
 - `model`: Preferred model (sonnet, haiku, opus)
@@ -42,16 +42,16 @@ User/Main Agent (Coordinator)
 
 1. **Agent Files** (`.claude/agents/<platform>/`)
    - **Android** (`.claude/agents/android/`)
-     - `cloudx-android-integrator.md` - Implements SDK integration with fallback logic
-     - `cloudx-android-auditor.md` - Validates that existing fallback paths remain intact
-     - `cloudx-android-build-verifier.md` - Runs Gradle builds and reports errors
-     - `cloudx-android-privacy-checker.md` - Validates GDPR/CCPA/COPPA compliance
+     - `cloudx-android-integrator.md` → `@agent-cloudx-android-integrator` (implements SDK integration with fallback logic)
+     - `cloudx-android-auditor.md` → `@agent-cloudx-android-auditor` (validates that existing fallback paths remain intact)
+     - `cloudx-android-build-verifier.md` → `@agent-cloudx-android-build-verifier` (runs Gradle builds and reports errors)
+     - `cloudx-android-privacy-checker.md` → `@agent-cloudx-android-privacy-checker` (validates GDPR/CCPA/COPPA compliance)
 
    - **Flutter** (`.claude/agents/flutter/`)
-     - `cloudx-flutter-integrator.md` - Implements SDK integration with fallback logic
-     - `cloudx-flutter-auditor.md` - Validates that existing fallback paths remain intact
-     - `cloudx-flutter-build-verifier.md` - Runs Flutter builds and reports errors
-     - `cloudx-flutter-privacy-checker.md` - Validates GDPR/CCPA/COPPA compliance
+     - `cloudx-flutter-integrator.md` → `@agent-cloudx-flutter-integrator` (implements SDK integration with fallback logic)
+     - `cloudx-flutter-auditor.md` → `@agent-cloudx-flutter-auditor` (validates that existing fallback paths remain intact)
+     - `cloudx-flutter-build-verifier.md` → `@agent-cloudx-flutter-build-verifier` (runs Flutter builds and reports errors)
+     - `cloudx-flutter-privacy-checker.md` → `@agent-cloudx-flutter-privacy-checker` (validates GDPR/CCPA/COPPA compliance)
 
 2. **Documentation** (`docs/<platform>/`)
    - **Android** (`docs/android/`)
@@ -196,16 +196,16 @@ cd /path/to/android/project
 claude
 
 # Test integration agent
-"Use cloudx-android-integrator to integrate CloudX SDK with app key: test-key"
+"Use @agent-cloudx-android-integrator to integrate CloudX SDK with app key: test-key"
 
 # Test auditor
-"Use cloudx-android-auditor to verify fallback paths"
+"Use @agent-cloudx-android-auditor to verify fallback paths"
 
 # Test build verifier
-"Use cloudx-android-build-verifier to run ./gradlew build"
+"Use @agent-cloudx-android-build-verifier to run ./gradlew build"
 
 # Test privacy checker
-"Use cloudx-android-privacy-checker to validate GDPR compliance"
+"Use @agent-cloudx-android-privacy-checker to validate GDPR compliance"
 ```
 
 ## Agent Development Guidelines
@@ -222,13 +222,13 @@ claude
 
 **Explicit (Recommended)**:
 ```
-Use cloudx-android-integrator to integrate CloudX SDK
+Use @agent-cloudx-android-integrator to integrate CloudX SDK
 ```
 
 **Implicit (Auto-routing)**:
 ```
 Integrate CloudX SDK into my app
-→ Claude Code routes to cloudx-android-integrator based on description
+→ Claude Code routes to @agent-cloudx-android-integrator based on description
 ```
 
 ### Agent Coordination

@@ -2,7 +2,7 @@
 
 This document defines a custom Claude Code subagent that helps publishers integrate CloudX SDK.
 
-> **⚠️ Important**: The `cloudx-android-integrator` agent now supports **two integration modes**:
+> **⚠️ Important**: The `@agent-cloudx-android-integrator` agent now supports **two integration modes**:
 > - **CloudX-Only Mode**: Clean CloudX integration for greenfield projects (no existing ad SDKs)
 > - **First-Look with Fallback Mode**: CloudX as primary with fallback to AdMob/AppLovin (migration projects)
 >
@@ -968,7 +968,7 @@ You can customize the agent by:
 ## Next Steps
 
 1. Create the agent file at `.claude/agents/cloudx-integration.md`
-2. Test the agent with: `Use cloudx-integration to analyze my app's ad setup`
+2. Test the agent with: `Use @agent-cloudx-integration to analyze my app's ad setup`
 3. Iterate on the agent's instructions based on real integration experiences
 4. Share with your team by committing to version control
 

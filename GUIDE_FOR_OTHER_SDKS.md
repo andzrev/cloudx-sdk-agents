@@ -179,7 +179,7 @@ cloudx-[platform]-sdk/
 
 **Example Prompt Pattern:**
 ```
-Use cloudx-ios-integrator to integrate CloudX SDK with AdMob fallback
+Use @agent-cloudx-ios-integrator to integrate CloudX SDK with AdMob fallback
 ```
 
 **Key Sections in Agent Doc:**
@@ -207,7 +207,7 @@ Use cloudx-ios-integrator to integrate CloudX SDK with AdMob fallback
 
 **Example Prompt Pattern:**
 ```
-Use cloudx-ios-auditor to verify my AdMob fallback still works
+Use @agent-cloudx-ios-auditor to verify my AdMob fallback still works
 ```
 
 **Key Sections:**
@@ -234,7 +234,7 @@ Use cloudx-ios-auditor to verify my AdMob fallback still works
 
 **Example Prompt Pattern:**
 ```
-Use cloudx-ios-build-verifier to build the project
+Use @agent-cloudx-ios-build-verifier to build the project
 ```
 
 **Platform-Specific Commands:**
@@ -273,7 +273,7 @@ flutter build apk
 
 **Example Prompt Pattern:**
 ```
-Use cloudx-ios-privacy-checker to audit privacy compliance
+Use @agent-cloudx-ios-privacy-checker to audit privacy compliance
 ```
 
 **Platform-Specific Checks:**
@@ -319,7 +319,7 @@ Flutter:
 
 **Example Prompt Pattern:**
 ```
-Use cloudx-ios-agent-maintainer to sync agent repo with SDK changes
+Use @agent-cloudx-ios-agent-maintainer to sync agent repo with SDK changes
 ```
 
 **Cross-Repo Sync Mode:**
@@ -480,17 +480,17 @@ bash <(curl -fsSL https://raw.githubusercontent.com/cloudx-io/cloudx-[platform]-
 
 **Full Integration:**
 ```
-1. Use cloudx-ios-integrator to integrate CloudX SDK with AdMob fallback
-2. Use cloudx-ios-auditor to verify fallback paths are correct
-3. Use cloudx-ios-build-verifier to build the project
-4. Use cloudx-ios-privacy-checker to validate privacy compliance
+1. Use @agent-cloudx-ios-integrator to integrate CloudX SDK with AdMob fallback
+2. Use @agent-cloudx-ios-auditor to verify fallback paths are correct
+3. Use @agent-cloudx-ios-build-verifier to build the project
+4. Use @agent-cloudx-ios-privacy-checker to validate privacy compliance
 ```
 
 **Quick Fix:**
 ```
-1. Use cloudx-ios-auditor to find what's broken
-2. Use cloudx-ios-integrator to fix the issues
-3. Use cloudx-ios-build-verifier to verify fixes compile
+1. Use @agent-cloudx-ios-auditor to find what's broken
+2. Use @agent-cloudx-ios-integrator to fix the issues
+3. Use @agent-cloudx-ios-build-verifier to verify fixes compile
 ```
 
 ### Documentation

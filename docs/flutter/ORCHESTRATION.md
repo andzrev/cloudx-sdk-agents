@@ -22,7 +22,7 @@ This guide explains how to use multiple agents together for complex workflows, d
 Use the agent name directly:
 
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
 ```
 
 **Advantages**:
@@ -38,7 +38,7 @@ Let Claude Code route based on intent:
 Integrate CloudX SDK into my Flutter app
 ```
 
-Claude Code will automatically route to `cloudx-flutter-integrator` based on the description in agent frontmatter.
+Claude Code will automatically route to `@agent-cloudx-flutter-integrator` based on the description in agent frontmatter.
 
 **Advantages**:
 - Natural language
@@ -67,10 +67,10 @@ Claude Code will automatically route to `cloudx-flutter-integrator` based on the
 **Scenario**: Integrating CloudX into a new or existing Flutter app
 
 ```
-1. Use cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_KEY
-2. Use cloudx-flutter-auditor to verify the integration
-3. Use cloudx-flutter-build-verifier to build the project
-4. Use cloudx-flutter-privacy-checker to validate privacy compliance
+1. Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_KEY
+2. Use @agent-cloudx-flutter-auditor to verify the integration
+3. Use @agent-cloudx-flutter-build-verifier to build the project
+4. Use @agent-cloudx-flutter-privacy-checker to validate privacy compliance
 ```
 
 **Expected outcome**:
@@ -89,8 +89,8 @@ Claude Code will automatically route to `cloudx-flutter-integrator` based on the
 **Scenario**: Fast integration with basic validation
 
 ```
-1. Use cloudx-flutter-integrator to integrate CloudX SDK
-2. Use cloudx-flutter-build-verifier to verify it compiles
+1. Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
+2. Use @agent-cloudx-flutter-build-verifier to verify it compiles
 ```
 
 **Expected outcome**:
@@ -107,9 +107,9 @@ Claude Code will automatically route to `cloudx-flutter-integrator` based on the
 **Scenario**: Final checks before deploying to production
 
 ```
-1. Use cloudx-flutter-auditor to verify integration correctness
-2. Use cloudx-flutter-build-verifier to run builds
-3. Use cloudx-flutter-privacy-checker to validate compliance
+1. Use @agent-cloudx-flutter-auditor to verify integration correctness
+2. Use @agent-cloudx-flutter-build-verifier to run builds
+3. Use @agent-cloudx-flutter-privacy-checker to validate compliance
 ```
 
 **Expected outcome**:
@@ -129,18 +129,18 @@ Claude Code will automatically route to `cloudx-flutter-integrator` based on the
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-build-verifier to diagnose the issue
+1. Use @agent-cloudx-flutter-build-verifier to diagnose the issue
    [Agent reports specific errors with file:line references]
 
 2. [Manually fix errors based on agent's recommendations]
 
-3. Use cloudx-flutter-build-verifier to verify fixes
+3. Use @agent-cloudx-flutter-build-verifier to verify fixes
    [Agent confirms builds now pass]
 ```
 
 **Example dialogue**:
 ```
-You: Use cloudx-flutter-build-verifier to build my project
+You: Use @agent-cloudx-flutter-build-verifier to build my project
 
 Agent: ❌ Build failed with 3 errors:
 1. lib/main.dart:15 - Missing import 'package:cloudx_flutter/cloudx.dart'
@@ -154,7 +154,7 @@ Fixes:
 
 You: [Fix errors manually]
 
-You: Use cloudx-flutter-build-verifier to verify fixes
+You: Use @agent-cloudx-flutter-build-verifier to verify fixes
 
 Agent: ✅ All builds pass! Ready for testing.
 ```
@@ -167,12 +167,12 @@ Agent: ✅ All builds pass! Ready for testing.
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-auditor to check fallback logic
+1. Use @agent-cloudx-flutter-auditor to check fallback logic
    [Agent identifies missing fallback trigger in onAdLoadFailed]
 
 2. [Fix the specific issue]
 
-3. Use cloudx-flutter-auditor to re-verify
+3. Use @agent-cloudx-flutter-auditor to re-verify
    [Agent confirms fallback now works]
 
 4. Test with airplane mode to verify fallback manually
@@ -180,7 +180,7 @@ Agent: ✅ All builds pass! Ready for testing.
 
 **Example dialogue**:
 ```
-You: Use cloudx-flutter-auditor to check my AdMob fallback
+You: Use @agent-cloudx-flutter-auditor to check my AdMob fallback
 
 Agent: ⚠️ Fallback validation FAILED
 
@@ -196,7 +196,7 @@ onAdLoadFailed: (error) {
 
 You: [Fix the callback]
 
-You: Use cloudx-flutter-auditor to verify
+You: Use @agent-cloudx-flutter-auditor to verify
 
 Agent: ✅ Fallback paths validated! All checks pass.
 ```
@@ -209,18 +209,18 @@ Agent: ✅ Fallback paths validated! All checks pass.
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-privacy-checker to audit privacy
+1. Use @agent-cloudx-flutter-privacy-checker to audit privacy
    [Agent identifies missing CCPA implementation]
 
 2. [Add CCPA privacy API calls]
 
-3. Use cloudx-flutter-privacy-checker to re-check
+3. Use @agent-cloudx-flutter-privacy-checker to re-check
    [Agent confirms compliance]
 ```
 
 **Example dialogue**:
 ```
-You: Use cloudx-flutter-privacy-checker to validate privacy
+You: Use @agent-cloudx-flutter-privacy-checker to validate privacy
 
 Agent: ⚠️ Privacy compliance: PARTIAL
 
@@ -235,7 +235,7 @@ await CloudX.setCCPAPrivacyString('1YNN');
 
 You: [Add CCPA code]
 
-You: Use cloudx-flutter-privacy-checker to re-validate
+You: Use @agent-cloudx-flutter-privacy-checker to re-validate
 
 Agent: ✅ Privacy compliance: PASS
 All regulations properly implemented.
@@ -251,9 +251,9 @@ All regulations properly implemented.
 
 ```
 Run these validations in parallel:
-1. Use cloudx-flutter-auditor to verify integration
-2. Use cloudx-flutter-build-verifier to build the project
-3. Use cloudx-flutter-privacy-checker to check compliance
+1. Use @agent-cloudx-flutter-auditor to verify integration
+2. Use @agent-cloudx-flutter-build-verifier to build the project
+3. Use @agent-cloudx-flutter-privacy-checker to check compliance
 ```
 
 **Advantages**:
@@ -281,10 +281,10 @@ Run these validations in parallel:
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-integrator to integrate CloudX SDK
+1. Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
    [Agent detects no existing ad SDK, implements CloudX-only]
 
-2. Use cloudx-flutter-build-verifier to verify builds
+2. Use @agent-cloudx-flutter-build-verifier to verify builds
    [Agent confirms compilation success]
 
 3. flutter run
@@ -304,13 +304,13 @@ Run these validations in parallel:
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-integrator to integrate CloudX SDK
+1. Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
    [Agent detects google_mobile_ads, implements first-look with fallback]
 
-2. Use cloudx-flutter-auditor to verify AdMob fallback intact
+2. Use @agent-cloudx-flutter-auditor to verify AdMob fallback intact
    [Agent validates fallback paths work correctly]
 
-3. Use cloudx-flutter-build-verifier to build
+3. Use @agent-cloudx-flutter-build-verifier to build
    [Agent confirms builds pass]
 
 4. Test fallback with airplane mode
@@ -330,12 +330,12 @@ Run these validations in parallel:
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-privacy-checker to audit current state
+1. Use @agent-cloudx-flutter-privacy-checker to audit current state
    [Agent identifies missing privacy implementations]
 
 2. [Implement missing privacy APIs based on agent recommendations]
 
-3. Use cloudx-flutter-privacy-checker to re-validate
+3. Use @agent-cloudx-flutter-privacy-checker to re-validate
    [Agent confirms compliance]
 ```
 
@@ -358,9 +358,9 @@ Run these validations in parallel:
 2. Set production environment:
    [Change CloudX.setEnvironment('production')]
 
-3. Use cloudx-flutter-auditor to validate
-4. Use cloudx-flutter-build-verifier to build release
-5. Use cloudx-flutter-privacy-checker for final compliance check
+3. Use @agent-cloudx-flutter-auditor to validate
+4. Use @agent-cloudx-flutter-build-verifier to build release
+5. Use @agent-cloudx-flutter-privacy-checker for final compliance check
 
 6. flutter build apk --release
 7. flutter build appbundle --release
@@ -379,15 +379,15 @@ Run these validations in parallel:
 
 **Workflow**:
 ```
-1. Use cloudx-flutter-auditor to identify issues
+1. Use @agent-cloudx-flutter-auditor to identify issues
    [Agent pinpoints exact problems with file:line references]
 
 2. [Fix identified issues]
 
-3. Use cloudx-flutter-build-verifier to verify fixes compile
+3. Use @agent-cloudx-flutter-build-verifier to verify fixes compile
    [Agent checks builds pass]
 
-4. Use cloudx-flutter-auditor to re-verify
+4. Use @agent-cloudx-flutter-auditor to re-verify
    [Agent confirms all issues resolved]
 ```
 
@@ -404,8 +404,8 @@ Run these validations in parallel:
 
 **Do**:
 ```
-1. Use cloudx-flutter-integrator to integrate CloudX SDK
-2. Use cloudx-flutter-auditor to verify
+1. Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
+2. Use @agent-cloudx-flutter-auditor to verify
 ```
 
 **Why**: Catches integration issues immediately
@@ -417,7 +417,7 @@ Run these validations in parallel:
 **Do**:
 ```
 1. [Make code changes]
-2. Use cloudx-flutter-build-verifier to verify
+2. Use @agent-cloudx-flutter-build-verifier to verify
 3. flutter run
 ```
 
@@ -429,7 +429,7 @@ Run these validations in parallel:
 
 **Do**:
 ```
-1. Use cloudx-flutter-privacy-checker to audit
+1. Use @agent-cloudx-flutter-privacy-checker to audit
 2. [Fix any issues]
 3. Deploy
 ```
@@ -460,23 +460,23 @@ Keep a checklist for your team:
 ## Our CloudX Integration Workflow
 
 ### Initial Integration
-1. Use cloudx-flutter-integrator with app key
-2. Use cloudx-flutter-auditor to verify
-3. Use cloudx-flutter-build-verifier to build
+1. Use @agent-cloudx-flutter-integrator with app key
+2. Use @agent-cloudx-flutter-auditor to verify
+3. Use @agent-cloudx-flutter-build-verifier to build
 4. Manual testing on Android/iOS
 
 ### Pre-Production
-1. Use cloudx-flutter-auditor for final check
-2. Use cloudx-flutter-privacy-checker for compliance
+1. Use @agent-cloudx-flutter-auditor for final check
+2. Use @agent-cloudx-flutter-privacy-checker for compliance
 3. Disable logging
 4. Set production environment
 5. Build release APK/AAB
 6. Submit to stores
 
 ### Debugging
-1. Use cloudx-flutter-auditor to identify issue
+1. Use @agent-cloudx-flutter-auditor to identify issue
 2. Fix based on recommendations
-3. Use cloudx-flutter-build-verifier to verify
+3. Use @agent-cloudx-flutter-build-verifier to verify
 4. Repeat until resolved
 ```
 
@@ -500,9 +500,9 @@ Keep a checklist for your team:
 **A**: You can request parallel execution in a single message:
 ```
 Run these in parallel:
-1. Use cloudx-flutter-auditor
-2. Use cloudx-flutter-build-verifier
-3. Use cloudx-flutter-privacy-checker
+1. Use @agent-cloudx-flutter-auditor
+2. Use @agent-cloudx-flutter-build-verifier
+3. Use @agent-cloudx-flutter-privacy-checker
 ```
 
 But they'll still run sequentially. True parallel execution depends on Claude Code's implementation.
@@ -511,7 +511,7 @@ But they'll still run sequentially. True parallel execution depends on Claude Co
 
 ### Q: Which agent should I use first?
 
-**A**: Always start with **cloudx-flutter-integrator** for initial integration. Then use other agents for validation.
+**A**: Always start with **@agent-cloudx-flutter-integrator** for initial integration. Then use other agents for validation.
 
 ---
 
@@ -557,10 +557,10 @@ claude
 ```
 
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_KEY
-Use cloudx-flutter-auditor to verify the integration
-Use cloudx-flutter-build-verifier to build the project
-Use cloudx-flutter-privacy-checker to validate compliance
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_KEY
+Use @agent-cloudx-flutter-auditor to verify the integration
+Use @agent-cloudx-flutter-build-verifier to build the project
+Use @agent-cloudx-flutter-privacy-checker to validate compliance
 ```
 
 ---
@@ -568,9 +568,9 @@ Use cloudx-flutter-privacy-checker to validate compliance
 ### Template 2: Quick Fix
 
 ```
-Use cloudx-flutter-auditor to identify the issue
+Use @agent-cloudx-flutter-auditor to identify the issue
 [Fix based on recommendations]
-Use cloudx-flutter-build-verifier to verify fixes compile
+Use @agent-cloudx-flutter-build-verifier to verify fixes compile
 ```
 
 ---
@@ -578,10 +578,10 @@ Use cloudx-flutter-build-verifier to verify fixes compile
 ### Template 3: Pre-Production Checklist
 
 ```
-Use cloudx-flutter-auditor for final validation
-Use cloudx-flutter-privacy-checker for compliance
+Use @agent-cloudx-flutter-auditor for final validation
+Use @agent-cloudx-flutter-privacy-checker for compliance
 [Disable logging, set production environment]
-Use cloudx-flutter-build-verifier to build release
+Use @agent-cloudx-flutter-build-verifier to build release
 ```
 
 ---

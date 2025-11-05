@@ -6,10 +6,10 @@ Automate your CloudX SDK integration using AI-powered Claude Code agents. This g
 
 Claude Code agents are specialized AI assistants that automate complex integration tasks. CloudX provides 4 specialized agents that:
 
-- **cloudx-android-integrator**: Implements CloudX SDK first look with fallback to AdMob/AppLovin
-- **cloudx-android-auditor**: Validates that existing ad fallback paths remain intact
-- **cloudx-android-build-verifier**: Runs Gradle builds and catches compilation errors
-- **cloudx-android-privacy-checker**: Ensures GDPR, CCPA, and COPPA compliance
+- **@agent-cloudx-android-integrator**: Implements CloudX SDK first look with fallback to AdMob/AppLovin
+- **@agent-cloudx-android-auditor**: Validates that existing ad fallback paths remain intact
+- **@agent-cloudx-android-build-verifier**: Runs Gradle builds and catches compilation errors
+- **@agent-cloudx-android-privacy-checker**: Ensures GDPR, CCPA, and COPPA compliance
 
 ## Benefits
 
@@ -142,17 +142,17 @@ claude  # Launches Claude Code CLI
 
 Type (explicitly invoke the agent):
 ```
-Use cloudx-android-integrator to integrate CloudX SDK with app key: YOUR_APP_KEY
+Use @agent-cloudx-android-integrator to integrate CloudX SDK with app key: YOUR_APP_KEY
 ```
 
 Or be more specific:
 ```
-Use cloudx-android-integrator to integrate CloudX SDK as primary ad network with AdMob fallback.
+Use @agent-cloudx-android-integrator to integrate CloudX SDK as primary ad network with AdMob fallback.
 My app key is abc123-your-key.
 Update banner and interstitial ads.
 ```
 
-**Important:** Always start with `Use cloudx-android-integrator to` so Claude Code loads the correct agent.
+**Important:** Always start with `Use @agent-cloudx-android-integrator to` so Claude Code loads the correct agent.
 
 **Step 3: Review Changes**
 
@@ -181,22 +181,22 @@ You can also invoke agents individually:
 
 **Integration Only:**
 ```
-Use cloudx-android-integrator to integrate CloudX SDK with AdMob fallback
+Use @agent-cloudx-android-integrator to integrate CloudX SDK with AdMob fallback
 ```
 
 **Validation Only:**
 ```
-Use cloudx-android-auditor to verify my AdMob fallback paths are correct
+Use @agent-cloudx-android-auditor to verify my AdMob fallback paths are correct
 ```
 
 **Build Check:**
 ```
-Use cloudx-android-build-verifier to run ./gradlew build and check for errors
+Use @agent-cloudx-android-build-verifier to run ./gradlew build and check for errors
 ```
 
 **Privacy Audit:**
 ```
-Use cloudx-android-privacy-checker to validate GDPR compliance
+Use @agent-cloudx-android-privacy-checker to validate GDPR compliance
 ```
 
 ---
@@ -324,7 +324,7 @@ Integrate CloudX SDK:
 
 ### Agents Not Found
 
-**Symptom:** Claude Code says "I don't have access to cloudx-android-integrator"
+**Symptom:** Claude Code says "I don't have access to @agent-cloudx-android-integrator"
 
 **Solution:**
 ```bash
@@ -332,10 +332,10 @@ Integrate CloudX SDK:
 ls ~/.claude/agents/
 
 # Should show:
-# cloudx-android-integrator.md
-# cloudx-android-auditor.md
-# cloudx-android-build-verifier.md
-# cloudx-android-privacy-checker.md
+# @agent-cloudx-android-integrator (cloudx-android-integrator.md)
+# @agent-cloudx-android-auditor (cloudx-android-auditor.md)
+# @agent-cloudx-android-build-verifier (cloudx-android-build-verifier.md)
+# @agent-cloudx-android-privacy-checker (cloudx-android-privacy-checker.md)
 
 # If missing, reinstall:
 bash <(curl -fsSL https://raw.githubusercontent.com/cloudx-io/cloudexchange.android.sdk/main/install.sh)
@@ -348,7 +348,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/cloudx-io/cloudexchange.andr
 **Solution:**
 ```bash
 # Ask Claude to fix:
-Use cloudx-android-build-verifier to run ./gradlew build and fix any errors
+Use @agent-cloudx-android-build-verifier to run ./gradlew build and fix any errors
 ```
 
 Or manually:
@@ -366,7 +366,7 @@ Or manually:
 **Solution:**
 ```bash
 # Audit the integration:
-Use cloudx-android-auditor to check if my AdMob fallback paths are correct
+Use @agent-cloudx-android-auditor to check if my AdMob fallback paths are correct
 ```
 
 Claude will identify missing fallback logic and fix it.
@@ -378,7 +378,7 @@ Claude will identify missing fallback logic and fix it.
 **Solution:**
 ```bash
 # Run privacy check:
-Use cloudx-android-privacy-checker to validate GDPR and CCPA compliance
+Use @agent-cloudx-android-privacy-checker to validate GDPR and CCPA compliance
 ```
 
 ### Reinstall Agents
@@ -409,7 +409,7 @@ Integrate CloudX SDK with these requirements:
 
 Update specific ad placements only:
 ```
-Use cloudx-android-integrator to add CloudX to MainActivity banner only,
+Use @agent-cloudx-android-integrator to add CloudX to MainActivity banner only,
 keep other placements unchanged
 ```
 

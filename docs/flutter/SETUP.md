@@ -130,10 +130,10 @@ claude
 
 # List available agents
 # You should see:
-# - cloudx-flutter-integrator
-# - cloudx-flutter-auditor
-# - cloudx-flutter-build-verifier
-# - cloudx-flutter-privacy-checker
+# - @agent-cloudx-flutter-integrator
+# - @agent-cloudx-flutter-auditor
+# - @agent-cloudx-flutter-build-verifier
+# - @agent-cloudx-flutter-privacy-checker
 ```
 
 ---
@@ -156,12 +156,12 @@ claude
 
 **If you have CloudX credentials**:
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_APP_KEY
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: YOUR_APP_KEY
 ```
 
 **If you don't have credentials yet** (agents will use TODO placeholders):
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
 ```
 
 ### Step 4: Wait for Integration (~2-5 minutes)
@@ -259,7 +259,7 @@ CloudXBannerView(
 
 ## Agent Overview
 
-### 1. cloudx-flutter-integrator
+### 1. @agent-cloudx-flutter-integrator
 
 **Purpose**: Implements CloudX SDK integration
 
@@ -278,10 +278,10 @@ CloudXBannerView(
 
 **Example**:
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
 ```
 
-### 2. cloudx-flutter-auditor
+### 2. @agent-cloudx-flutter-auditor
 
 **Purpose**: Validates integration correctness
 
@@ -301,10 +301,10 @@ Use cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
 
 **Example**:
 ```
-Use cloudx-flutter-auditor to verify my CloudX integration
+Use @agent-cloudx-flutter-auditor to verify my CloudX integration
 ```
 
-### 3. cloudx-flutter-build-verifier
+### 3. @agent-cloudx-flutter-build-verifier
 
 **Purpose**: Runs builds and catches errors
 
@@ -324,10 +324,10 @@ Use cloudx-flutter-auditor to verify my CloudX integration
 
 **Example**:
 ```
-Use cloudx-flutter-build-verifier to build my project
+Use @agent-cloudx-flutter-build-verifier to build my project
 ```
 
-### 4. cloudx-flutter-privacy-checker
+### 4. @agent-cloudx-flutter-privacy-checker
 
 **Purpose**: Validates privacy compliance
 
@@ -347,7 +347,7 @@ Use cloudx-flutter-build-verifier to build my project
 
 **Example**:
 ```
-Use cloudx-flutter-privacy-checker to validate privacy compliance
+Use @agent-cloudx-flutter-privacy-checker to validate privacy compliance
 ```
 
 ---
@@ -362,7 +362,7 @@ claude
 ```
 
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK with app key: 8pRtAn-tx7hRen8DmolSf
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: 8pRtAn-tx7hRen8DmolSf
 ```
 
 **Result**:
@@ -379,7 +379,7 @@ claude
 ```
 
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
 ```
 
 **Result**:
@@ -396,10 +396,10 @@ claude
 ```
 
 ```
-1. Use cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
-2. Use cloudx-flutter-auditor to verify the integration
-3. Use cloudx-flutter-build-verifier to build the project
-4. Use cloudx-flutter-privacy-checker to validate privacy compliance
+1. Use @agent-cloudx-flutter-integrator to integrate CloudX SDK with app key: MY_KEY
+2. Use @agent-cloudx-flutter-auditor to verify the integration
+3. Use @agent-cloudx-flutter-build-verifier to build the project
+4. Use @agent-cloudx-flutter-privacy-checker to validate privacy compliance
 ```
 
 **Result**:
@@ -417,7 +417,7 @@ claude
 ```
 
 ```
-Use cloudx-flutter-integrator to integrate CloudX SDK
+Use @agent-cloudx-flutter-integrator to integrate CloudX SDK
 ```
 
 **Result**:
@@ -494,7 +494,7 @@ flutter run -d ios
 claude
 ```
 ```
-Use cloudx-flutter-auditor to check my CloudX initialization
+Use @agent-cloudx-flutter-auditor to check my CloudX initialization
 ```
 
 ### Issue 2: "allowIosExperimental is required" Error
@@ -573,7 +573,7 @@ flutter build apk
 claude
 ```
 ```
-Use cloudx-flutter-build-verifier to diagnose build issues
+Use @agent-cloudx-flutter-build-verifier to diagnose build issues
 ```
 
 ### Issue 6: Fallback Not Triggering
@@ -590,7 +590,7 @@ Use cloudx-flutter-build-verifier to diagnose build issues
 claude
 ```
 ```
-Use cloudx-flutter-auditor to check my fallback logic
+Use @agent-cloudx-flutter-auditor to check my fallback logic
 ```
 
 ### Issue 7: iOS Build Fails (CocoaPods)
@@ -632,7 +632,7 @@ platform :ios, '14.0'
 
 3. **Privacy Compliance**
    ```
-   Use cloudx-flutter-privacy-checker to validate privacy compliance
+   Use @agent-cloudx-flutter-privacy-checker to validate privacy compliance
    ```
 
 4. **Production Preparation**
