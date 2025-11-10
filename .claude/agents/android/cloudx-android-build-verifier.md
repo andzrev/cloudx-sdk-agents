@@ -196,8 +196,8 @@ Next step: Fix these compilation errors and re-run build
 Command: ./gradlew dependencies --configuration debugRuntimeClasspath
 
 CloudX SDK dependencies:
-- io.cloudx:sdk:0.5.0
-- io.cloudx:adapter-cloudx:0.5.0
+- io.cloudx:sdk:0.6.1
+- io.cloudx:adapter-cloudx:0.6.1
 
 Fallback SDK dependencies:
 - com.google.android.gms:play-services-ads:23.0.0

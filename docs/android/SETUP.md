@@ -211,8 +211,8 @@ The agents will modify these files (typical integration):
 ```gradle
 dependencies {
     // ADDED: CloudX SDK
-    implementation("io.cloudx:sdk:0.5.0")
-    implementation("io.cloudx:adapter-cloudx:0.5.0")
+    implementation("io.cloudx:sdk:0.6.1")
+    implementation("io.cloudx:adapter-cloudx:0.6.1")
 
     // UNCHANGED: Your existing ad SDKs
     implementation("com.google.android.gms:play-services-ads:23.0.0")
