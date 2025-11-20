@@ -27,19 +27,21 @@ if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ] || [ -n "$GITLAB_CI" ] || [ -n "$CIR
 fi
 
 # Parse command-line arguments
+MAIN_ARGS=()  # Arguments to pass to main()
 for arg in "$@"; do
     case $arg in
         --branch=*)
             BRANCH="${arg#*=}"
-            shift
             ;;
         --platform=*)
             PLATFORM="${arg#*=}"
-            shift
             ;;
         --yes|-y|--non-interactive)
             NON_INTERACTIVE="true"
-            shift
+            ;;
+        *)
+            # Pass other arguments to main() (--help, --global, --local)
+            MAIN_ARGS+=("$arg")
             ;;
     esac
 done
@@ -557,5 +559,5 @@ main() {
     fi
 }
 
-# Run main function
-main "$@"
+# Run main function with filtered arguments
+main "${MAIN_ARGS[@]}"

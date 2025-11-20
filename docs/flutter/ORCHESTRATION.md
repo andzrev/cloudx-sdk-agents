@@ -149,7 +149,7 @@ Agent: ❌ Build failed with 3 errors:
 
 Fixes:
 1. Add import statement
-2. Add cloudx_flutter: ^0.1.2 to pubspec.yaml
+2. Add cloudx_flutter: ^0.18.0 to pubspec.yaml
 3. Run flutter pub get
 
 You: [Fix errors manually]

@@ -92,7 +92,7 @@ The agent adds this to `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  cloudx_flutter: ^0.1.2
+  cloudx_flutter: ^0.18.0
   # Existing ad SDKs preserved if present
   # google_mobile_ads: ^3.0.0
   # applovin_max: ^2.0.0

@@ -8,7 +8,7 @@ This repository contains specialized Claude Code agents for automating CloudX SD
 
 **Supported Platforms:**
 - **Android** (v0.6.1) - 4 agents - Production ready
-- **Flutter** (v0.1.2) - 4 agents - Production ready
+- **Flutter** (v0.18.0) - 4 agents - Production ready
 - **iOS** - Coming soon
 
 ## Architecture Overview

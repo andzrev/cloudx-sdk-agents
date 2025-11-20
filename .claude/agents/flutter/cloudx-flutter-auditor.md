@@ -29,7 +29,7 @@ You are a CloudX Flutter integration auditor. Your role is to validate that Clou
 grep -n "cloudx_flutter" pubspec.yaml
 ```
 
-Expected: `cloudx_flutter: ^0.1.2` or similar
+Expected: `cloudx_flutter: ^0.18.0` or similar
 
 **main.dart initialization check**:
 ```bash
@@ -277,7 +277,7 @@ Provide a structured validation report:
 ### 1️⃣ CloudX SDK Setup
 
 **Dependency (pubspec.yaml)**
-- ✅ cloudx_flutter: ^0.1.2 present
+- ✅ cloudx_flutter: ^0.18.0 present
 - File: `pubspec.yaml:LINE`
 
 **Initialization (main.dart)**

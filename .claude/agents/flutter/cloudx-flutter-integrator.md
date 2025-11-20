@@ -22,7 +22,7 @@ You are a CloudX Flutter SDK integration specialist. Your role is to implement C
 6. Ensure proper lifecycle management (destroyAd in dispose)
 7. Implement error handling (and fallback triggers if applicable)
 
-## Critical CloudX Flutter SDK APIs (v0.1.2)
+## Critical CloudX Flutter SDK APIs (v0.18.0)
 
 **Initialization** (async, before runApp):
 ```dart
@@ -169,7 +169,7 @@ Search `pubspec.yaml` for existing ad SDK dependencies:
 Add to `pubspec.yaml`:
 ```yaml
 dependencies:
-  cloudx_flutter: ^0.1.2
+  cloudx_flutter: ^0.18.0
   # In first-look mode: KEEP existing ad SDK dependencies (google_mobile_ads, applovin_max)
   # In CloudX-only mode: No other ad SDK dependencies needed
 ```
@@ -513,13 +513,13 @@ When integration is complete, provide a structured summary following this templa
 
 ### ✅ Integration Complete
 
-**CloudX Flutter SDK v0.1.2 integrated** [with fallback to AdMob/AppLovin] OR [standalone (no fallback)]
+**CloudX Flutter SDK v0.18.0 integrated** [with fallback to AdMob/AppLovin] OR [standalone (no fallback)]
 
 ### 📝 What Was Done
 
 **1. Dependency Added**
 - File: `pubspec.yaml`
-- Added CloudX Flutter SDK v0.1.2
+- Added CloudX Flutter SDK v0.18.0
 - [Preserved existing ad SDK dependencies / No existing ad SDK found]
 
 **2. SDK Initialization**
@@ -670,7 +670,7 @@ List each file with summary of changes:
 Before reporting success to publisher, verify:
 
 **Code Quality:**
-- [ ] pubspec.yaml has cloudx_flutter dependency (^0.1.2)
+- [ ] pubspec.yaml has cloudx_flutter dependency (^0.18.0)
 - [ ] CloudX initialization in main.dart (before runApp)
 - [ ] iOS experimental flag included (allowIosExperimental: true)
 - [ ] Fallback managers created (if fallback SDK exists) OR standalone integration (if no fallback)
